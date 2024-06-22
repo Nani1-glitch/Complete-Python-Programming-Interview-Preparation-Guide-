@@ -286,3 +286,170 @@ def addition(n):
 numbers = (1,2,3,4,5,6,7)
 result = map(addition, numbers) # MAP ---> Combines both the above(addition function and below numbers)
 print(list(result)) # Converts the result to list and prints it out 
+
+
+from functools import reduce
+
+lis = [1,2,3,4,5,6,3,2,1]
+def multiply(x,y):
+    return x * y
+
+result = reduce(multiply, numbers) # Used to apply a given function cumulatively to the items of an iterable (like a list), from left to right, so as to reduce the iterable to a single value. It is part of the functools module.
+print(result)
+
+
+# PACKAGES AND MODULES
+"""
+A package is a collection of Python modules organized under a common namespace. 
+It is essentially a directory containing a special __init__.py file, which can be empty or contain package initialization code.
+mypackage/
+    __init__.py
+    module1.py
+    module2.py
+"""
+# Defining a function greet in a "virtual" module1
+def module1_greet():
+    print("Hello from module1!")
+
+# Defining a function farewell in a "virtual" module2
+def module2_farewell():
+    print("Goodbye from module2!")
+
+# Simulating the use of a package by calling the functions
+if __name__ == "__main__":
+    # Calling the function greet from the simulated module1
+    module1_greet()
+    
+    # Calling the function farewell from the simulated module2
+    module2_farewell()
+print("Modules Executed")
+   
+
+# OBJECT ORIENTED PROGRAMMING(oop)
+
+# Encapsulation and Abstraction
+
+class Person:
+    def __init__(self, name, age):
+        self.__name = name  # Private attribute
+        self.__age = age    # Private attribute
+
+    def get_name(self):
+        return self.__name
+
+    def set_age(self, age):
+        if age > 0:
+            self.__age = age
+        else:
+            print("Invalid age")
+
+# Inheritance and Polymorphism
+
+class Animal:
+    def __init__(self, name):
+        self.name = name
+
+    def speak(self):
+        pass  # Abstract method
+
+class Dog(Animal):
+    def __init__(self, name, breed):
+        super().__init__(name)
+        self.breed = breed
+
+    def speak(self):
+        print(f"{self.name} says Woof!")
+
+class Cat(Animal):
+    def __init__(self, name, breed):
+        super().__init__(name)
+        self.breed = breed
+
+    def speak(self):
+        print(f"{self.name} says Meow!")
+
+# Composition
+
+class Engine:
+    def start(self):
+        print("Engine started")
+
+class Car:
+    def __init__(self):
+        self.engine = Engine()  # Car has an Engine
+
+    def start(self):
+        self.engine.start()
+        print("Car started")
+
+# Association
+
+class Author:
+    def __init__(self, name):
+        self.name = name
+
+    def write_book(self):
+        print(f"{self.name} is writing a book")
+
+class Book:
+    def __init__(self, title, author):
+        self.title = title
+        self.author = author  # Book has an association with Author
+
+    def show_author(self):
+        print(f"The author of '{self.title}' is {self.author.name}")
+
+# Aggregation
+
+class Department:
+    def __init__(self, name):
+        self.name = name
+        self.employees = []
+
+    def add_employee(self, employee):
+        self.employees.append(employee)
+
+class Employee:
+    def __init__(self, name):
+        self.name = name
+
+# Demonstration of all concepts
+
+# Encapsulation
+person = Person(name="Alice", age=30)
+print(person.get_name())  # Output: Alice
+person.set_age(35)
+person.set_age(-5)  # Output: Invalid age
+
+# Inheritance and Polymorphism
+dog = Dog(name="Buddy", breed="Golden Retriever")
+cat = Cat(name="Whiskers", breed="Siamese")
+
+dog.speak()  # Output: Buddy says Woof!
+cat.speak()  # Output: Whiskers says Meow!
+
+# Composition
+car = Car()
+car.start()
+
+# Association
+author = Author(name="J.K. Rowling")
+book = Book(title="Harry Potter", author=author)
+book.show_author()  # Output: The author of 'Harry Potter' is J.K. Rowling
+
+# Aggregation
+dept = Department(name="HR")
+emp1 = Employee(name="John")
+emp2 = Employee(name="Jane")
+
+dept.add_employee(emp1)
+dept.add_employee(emp2)
+
+print(f"Department: {dept.name}")
+for emp in dept.employees:
+    print(f"Employee: {emp.name}")
+
+# Output:
+# Department: HR
+# Employee: John
+# Employee: Jane
